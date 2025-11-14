@@ -29,7 +29,10 @@ function Password({
       >
         <input
           type={showPassword ? "text" : "password"}
-          className={cn("w-full border-none outline-none", className)}
+          className={cn(
+            "w-full border-none outline-none placeholder:text-blue-200",
+            className
+          )}
           autoComplete="false"
           {...rest}
           id={id}
