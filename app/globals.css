@@ -3,20 +3,72 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --white: #ffffff;
+
+  /* black */
+  --black: #000000;
+  --black-900: #0c0c0c;
+  --black-800: #4b5563;
+  --black-700: #a1a3ab;
+
+  /* neutral */
+  --neutral-100: #d1d5db;
+
+  /* blue */
+  --blue-900: #0d224a;
+  --blue-800: #374151;
+  --blue-500: #5272ff;
+  --blue-200: #8ca3cd;
+  --blue-100: #e2ecf8;
+
+  /* red */
+  --red-900: #ee0039;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-white: var(--white);
+
+  /* black */
+  --color-black: var(--black);
+  --color-black-900: var(--black-900);
+  --color-black-800: var(--black-800);
+  --color-black-700: var(--black-700);
+
+  /* neutral */
+  --color-neutral-100: var(--neutral-100);
+
+  /* blue */
+  --color-blue-900: var(--blue-900);
+  --color-blue-800: var(--blue-800);
+  --color-blue-500: var(--blue-500);
+  --color-blue-200: var(--blue-200);
+  --color-blue-100: var(--blue-100);
+
+  /* red */
+  --color-red-900: var(--red-900);
+
+  --font-inter: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.label {
+  @apply text-sm font-medium text-black-900 leading-[100%];
+}
+
+.input {
+  @apply w-full p-2 h-[42px] text-sm text-black-900 placeholder:text-blue-200 border border-neutral-100 outline-none rounded-lg;
+}
+
+.btn {
+  @apply w-full flex items-center justify-center cursor-pointer disabled:cursor-default transition-transform duration-200 ease-in-out;
+  &:active {
+    @apply scale-95;
   }
+}
+
+.btn_primary {
+  @apply bg-blue-500 text-white text-base font-medium leading-[100%] h-10 p-2 rounded-lg disabled:opacity-70;
 }
 
 body {

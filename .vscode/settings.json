@@ -1,0 +1,110 @@
+{
+  // config related to code formatting
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "window.openFilesInNewWindow": "on",
+  "window.openFoldersInNewWindow": "on",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[prisma]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "[php]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[blade]": {
+    "editor.autoClosingBrackets": "always",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.validate.enable": true, //disable all built-in syntax checking
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "eslint.alwaysShowStatus": true,
+  // emmet
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "php": "php"
+  },
+  "blade.format.enable": true,
+
+  ///
+
+  "workbench.colorTheme": "Learn with Sumit - Peace of the eye",
+
+  // live sass compiler settings
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".css",
+      "savePath": "/assets/css"
+    }
+  ],
+  "liveSassCompile.settings.generateMap": false,
+  "editor.fontSize": 16,
+  "type": "module",
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "explorer.confirmDragAndDrop": false,
+  "search.actionsPosition": "auto",
+  "terminal.integrated.tabs.location": "left",
+  "editor.formatOnType": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.mouseWheelZoom": true,
+  "workbench.startupEditor": "none",
+  "editor.accessibilitySupport": "off",
+  "explorer.confirmDelete": false,
+  "editor.fontFamily": "'Fira Mono', monospace",
+  "terminal.integrated.autoReplies": {},
+  "terminal.integrated.automationProfile.osx": null,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.automationProfile.windows": null,
+  "git.path": "C:/Program Files/Git/mingw64/libexec/git-core/git.exe",
+  "workbench.editor.empty.hint": "hidden",
+  "files.autoSave": "afterDelay",
+  "security.workspace.trust.untrustedFiles": "open",
+  "code-runner.runInTerminal": true,
+  "editor.stickyScroll.enabled": false,
+  "typescript.format.enable": false,
+  "typescript.format.indentSwitchCase": false,
+  "workbench.editor.enablePreview": false,
+  "codeium.enableConfig": {
+    "*": false,
+    "properties": true
+  },
+  "codeium.enableCodeLens": false,
+  "debug.onTaskErrors": "showErrors",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.tsx": "default"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+    "javascript": true,
+    "javascriptreact": true,
+    "typescriptreact": true,
+    "html": false,
+    "typescript": true
+  },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "editor.minimap.showSlider": "always"
+}
