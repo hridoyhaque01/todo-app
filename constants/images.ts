@@ -3,4 +3,5 @@ export const IMAGES = {
   signupBg: "/images/signup-bg.png",
   profile: "/images/profile.png",
   logo: "/images/logo.png",
+  empty: "/images/empty.png",
 };

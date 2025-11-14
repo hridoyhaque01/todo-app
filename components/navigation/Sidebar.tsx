@@ -1,4 +1,4 @@
-import { HomeIcon, LogoutIcon, ROUTES } from "@/constants";
+import { LogoutIcon, ProfileIcon, ROUTES, TodoIcon } from "@/constants";
 import Link from "next/link";
 import User from "../profile/User";
 
@@ -9,19 +9,10 @@ function Sidebar() {
       <ul className="flex-1 mt-[30px]">
         <li>
           <Link
-            className="flex items-center gap-4 py-4 pl-14 pr-4 text-grey nav_bg"
-            href={ROUTES.dashboard}
-          >
-            <HomeIcon />
-            <span>Dashboard</span>
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="flex items-center gap-4 py-4 pl-14 pr-4"
+            className="flex items-center gap-4 py-4 pl-14 pr-4 nav_bg"
             href={ROUTES.todos}
           >
-            <HomeIcon />
+            <TodoIcon />
             <span>Todos</span>
           </Link>
         </li>
@@ -30,7 +21,7 @@ function Sidebar() {
             className="flex items-center gap-4 py-4 pl-14 pr-4"
             href={ROUTES.profile}
           >
-            <HomeIcon />
+            <ProfileIcon />
             <span>Account Information</span>
           </Link>
         </li>

@@ -12,7 +12,7 @@ function AdminLayout({
       <Sidebar />
       <div className="w-full flex flex-col">
         <Header />
-        <div className="flex-1 overflow-auto">{children}</div>
+        <div className="flex-1 overflow-auto relative">{children}</div>
       </div>
     </div>
   );
