@@ -31,7 +31,7 @@ function Login() {
             </span>
           </label>
           <Link
-            href={ROUTES.LOGIN}
+            href={ROUTES.login}
             className="text-sm text-blue-500 leading-3.5"
           >
             Forgot your password?
@@ -42,7 +42,7 @@ function Login() {
         </button>
         <p className="text-base leading-[100%] text-black-800">
           Don’t have an account?{" "}
-          <Link className="font-medium text-blue-500" href={ROUTES.SIGNUP}>
+          <Link className="font-medium text-blue-500" href={ROUTES.signup}>
             Register now
           </Link>
         </p>

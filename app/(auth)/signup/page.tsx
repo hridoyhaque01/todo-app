@@ -40,7 +40,7 @@ function Signup() {
         </button>
         <p className="text-base leading-[100%] text-black-800">
           Already have an account?{" "}
-          <Link className="font-medium text-blue-500" href={ROUTES.LOGIN}>
+          <Link className="font-medium text-blue-500" href={ROUTES.login}>
             Log in
           </Link>
         </p>
