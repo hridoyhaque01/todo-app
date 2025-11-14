@@ -10,6 +10,7 @@
   --black-900: #0c0c0c;
   --black-800: #4b5563;
   --black-700: #a1a3ab;
+  --black-600: #9f9f9f;
 
   /* neutral */
   --neutral-100: #d1d5db;
@@ -39,6 +40,7 @@
   --color-black-900: var(--black-900);
   --color-black-800: var(--black-800);
   --color-black-700: var(--black-700);
+  --color-black-600: var(--black-600);
 
   /* neutral */
   --color-neutral-100: var(--neutral-100);
@@ -77,6 +79,10 @@
 
 .btn_primary {
   @apply bg-blue-500 text-white text-base font-medium leading-[100%] h-10 p-2 rounded-lg disabled:opacity-70;
+}
+
+.title {
+  @apply text-2xl font-semibold leading-[100%] text-blue-900 max-w-max relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-2/3 after:h-0.5 after:bg-blue-500;
 }
 
 body {

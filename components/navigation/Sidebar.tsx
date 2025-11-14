@@ -10,7 +10,7 @@ function Sidebar() {
         <li>
           <Link
             className="flex items-center gap-4 py-4 pl-14 pr-4 text-grey nav_bg"
-            href={ROUTES.home}
+            href={ROUTES.dashboard}
           >
             <HomeIcon />
             <span>Dashboard</span>
@@ -19,7 +19,7 @@ function Sidebar() {
         <li>
           <Link
             className="flex items-center gap-4 py-4 pl-14 pr-4"
-            href={ROUTES.home}
+            href={ROUTES.todos}
           >
             <HomeIcon />
             <span>Todos</span>
@@ -28,7 +28,7 @@ function Sidebar() {
         <li>
           <Link
             className="flex items-center gap-4 py-4 pl-14 pr-4"
-            href={ROUTES.home}
+            href={ROUTES.profile}
           >
             <HomeIcon />
             <span>Account Information</span>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 function Login() {
   return (
-    <div className="w-full max-w-md mx-auto text-center">
+    <div className="w-full max-w-md mx-auto text-center p-6">
       <h2 className="text-3xl font-bold text-blue-900 leading-[30px]">
         Log in to your account
       </h2>

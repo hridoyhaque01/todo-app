@@ -15,6 +15,7 @@ function AuthImage() {
       alt={altText}
       width={606}
       height={606}
+      priority
       className="w-full"
     />
   );

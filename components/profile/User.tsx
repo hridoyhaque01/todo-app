@@ -10,6 +10,7 @@ function User() {
         width={200}
         height={200}
         className="size-[86px] object-cover rounded-full mx-auto"
+        priority
       />
       <h2 className="text-base font-semibold leading-[100%] mt-6">amanuel</h2>
       <p className="text-xs leading-[100%] mt-1">amanuel@gmail.com</p>
