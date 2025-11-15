@@ -1,3 +1,4 @@
+"use client";
 import { DeleteIcon } from "@/constants";
 import Input from "../shared/Input";
 import Textarea from "../shared/Textarea";
