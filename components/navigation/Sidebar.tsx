@@ -1,3 +1,4 @@
+import { logout } from "@/actions";
 import { LogoutIcon, ProfileIcon, ROUTES, TodoIcon } from "@/constants";
 import Link from "next/link";
 import User from "../profile/User";
@@ -29,6 +30,7 @@ function Sidebar() {
       <button
         type="button"
         className="py-4 px-14 flex items-center gap-2 text-grey border-none outline-none cursor-pointer"
+        onClick={logout}
       >
         <LogoutIcon />
         Logout

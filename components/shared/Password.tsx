@@ -1,6 +1,7 @@
 "use client";
 import { EyeCloseIcon, EyeIcon } from "@/constants";
 import { cn } from "@/lib";
+import { IFInputProps } from "@/types";
 import { useState } from "react";
 
 function Password({
@@ -10,8 +11,9 @@ function Password({
   innerWrapper = "",
   id = "password",
   className = "",
+  errorMessage = "",
   ...rest
-}) {
+}: IFInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -49,6 +51,9 @@ function Password({
           )}
         </button>
       </label>
+      {errorMessage && (
+        <p className="text-red-900 text-sm -mt-1 text-left">{errorMessage}</p>
+      )}
     </div>
   );
 }

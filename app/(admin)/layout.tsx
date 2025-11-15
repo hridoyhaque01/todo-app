@@ -1,21 +1,22 @@
 import Header from "@/components/navigation/Header";
 import Sidebar from "@/components/navigation/Sidebar";
+import { AuthProvider } from "@/contexts/AuthContext";
 import React from "react";
 
-function AdminLayout({
+export default function AdminLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <div className="flex bg-blue-50 h-screen">
-      <Sidebar />
-      <div className="w-full flex flex-col">
-        <Header />
-        <div className="flex-1 overflow-auto relative">{children}</div>
+    <AuthProvider>
+      <div className="flex bg-blue-50 h-screen">
+        <Sidebar />
+        <div className="w-full flex flex-col">
+          <Header />
+          <div className="flex-1 overflow-auto relative">{children}</div>
+        </div>
       </div>
-    </div>
+    </AuthProvider>
   );
 }
-
-export default AdminLayout;

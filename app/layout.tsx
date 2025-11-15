@@ -1,4 +1,4 @@
-import { AuthProvider, TodoProvider } from "@/contexts";
+import { TodoProvider } from "@/contexts";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -21,11 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <AuthProvider>
-          <TodoProvider>
-            <main className="font-inter">{children}</main>
-          </TodoProvider>
-        </AuthProvider>
+        <TodoProvider>
+          <main className="font-inter">{children}</main>
+        </TodoProvider>
       </body>
     </html>
   );

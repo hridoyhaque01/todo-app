@@ -1,10 +1,13 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  email: z.email({ message: "Invalid email address" }),
+  email: z
+    .string({ message: "Email is required" })
+    .email({ message: "Invalid email address" }),
   password: z
-    .string()
+    .string({ message: "Password is required" })
     .min(4, { message: "Password must be at least 8 characters" }),
+  remember: z.boolean().optional(),
 });
 
 export const signupSchema = z
@@ -15,12 +18,26 @@ export const signupSchema = z
     password: z
       .string()
       .min(4, { message: "Password must be at least 8 characters" }),
-    confirmPassword: z.string(),
+    confirm_password: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirm_password, {
     message: "Passwords don't match",
-    path: ["confirmPassword"],
+    path: ["confirm_password"],
   });
+
+export const updateSchema = z.object({
+  first_name: z.string().optional(),
+  last_name: z.string().optional(),
+  email: z.string().optional(),
+  address: z.string().optional(),
+  contact_number: z.string().optional(),
+  birthday: z.string().optional(),
+  bio: z.string().optional(),
+  // profile_image: z.string().optional(),
+});
 
 export type LoginInput = z.infer<typeof loginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;
+export type UpdateInput = z.infer<typeof updateSchema> & {
+  profile_image?: string;
+};
