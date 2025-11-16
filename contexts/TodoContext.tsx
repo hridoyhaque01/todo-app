@@ -11,11 +11,15 @@ import React, {
 
 type TodoContextType = {
   todos: ITodo[];
-  setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
   openModal: boolean;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openDropdown: boolean;
+  selectedTodo: ITodo | null;
+  setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+  removeTodo: (id: number) => Promise<void>;
+  setSelectedTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
+  handleSelectTodo: (todo: ITodo | null, status: boolean) => void;
 };
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
@@ -24,6 +28,7 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [selectedTodo, setSelectedTodo] = useState<ITodo | null>(null);
 
   // Function to fetch user from API
   const refreshTodos = async () => {
@@ -34,6 +39,17 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
     } catch (_error) {
       setTodos([]);
     }
+  };
+
+  // handle remove todo
+  const removeTodo = async (id: number) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
+  // handle select todo for editing
+  const handleSelectTodo = (todo: ITodo | null, status: boolean) => {
+    setSelectedTodo(todo);
+    setOpenModal(status);
   };
 
   // Fetch user once on mount
@@ -53,6 +69,10 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
         setOpenModal,
         openDropdown,
         setOpenDropdown,
+        removeTodo,
+        selectedTodo,
+        setSelectedTodo,
+        handleSelectTodo,
       }}
     >
       {children}

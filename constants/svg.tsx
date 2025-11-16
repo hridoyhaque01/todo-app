@@ -249,3 +249,40 @@ export const CalendarIcon = (props: React.SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
+
+export const SpinnerAnimatedIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 50 50"
+    width="50"
+    height="50"
+    {...props}
+  >
+    <circle
+      cx="25"
+      cy="25"
+      r="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeDasharray="126"
+      strokeDashoffset="0"
+    >
+      <animate
+        attributeName="stroke-dashoffset"
+        values="126;0"
+        dur="1s"
+        repeatCount="indefinite"
+      />
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0 25 25"
+        to="360 25 25"
+        dur="1s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </svg>
+);

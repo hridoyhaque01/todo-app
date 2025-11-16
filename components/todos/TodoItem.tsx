@@ -1,8 +1,23 @@
-import { DeleteIcon, DragIcon, EditIcon } from "@/constants";
+import {
+  DeleteIcon,
+  DragIcon,
+  EditIcon,
+  SpinnerAnimatedIcon,
+} from "@/constants";
 import { formatedDateString } from "@/lib";
 import { ITodo } from "@/types";
 
-export const TodoItem = ({ todo }: { todo: ITodo }) => {
+export const TodoItem = ({
+  todo,
+  pending = null,
+  removeHandler,
+  handleSelectTodo,
+}: {
+  todo: ITodo;
+  pending: number | null;
+  removeHandler: (id: number) => Promise<void>;
+  handleSelectTodo: (todo: ITodo | null, status: boolean) => void;
+}) => {
   return (
     <div className="p-6 flex flex-col gap-4 border border-neutral-100 rounded-lg bg-white">
       <div className="flex items-center gap-1">
@@ -27,14 +42,21 @@ export const TodoItem = ({ todo }: { todo: ITodo }) => {
         <button
           type="button"
           className="size-8 bg-blue-50 rounded-lg flex items-center justify-center border-none outline-none cursor-pointer text-blue-400"
+          onClick={() => handleSelectTodo(todo, true)}
         >
           <EditIcon />
         </button>
         <button
           type="button"
           className="size-8 bg-blue-50 rounded-lg flex items-center justify-center border-none outline-none cursor-pointer text-red-500"
+          disabled={pending === todo?.id}
+          onClick={() => removeHandler(todo?.id)}
         >
-          <DeleteIcon />
+          {pending !== todo?.id ? (
+            <DeleteIcon />
+          ) : (
+            <SpinnerAnimatedIcon className="size-3.5" />
+          )}
         </button>
       </div>
     </div>

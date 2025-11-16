@@ -32,7 +32,7 @@ const reducer = (state: CreateTodoInput, action: any) => {
   }
 };
 function TodoModal() {
-  const { setTodos, setOpenModal, openModal } = useTodo();
+  const { setTodos, openModal, handleSelectTodo } = useTodo();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isPending, setIsPending] = useState(false);
   const [actionErrors, setActionErrors] = useState<any>({});
@@ -64,7 +64,7 @@ function TodoModal() {
 
   const handleCloseModal = () => {
     dispatch({ type: "RESET" });
-    setOpenModal(false);
+    handleSelectTodo(null, false);
   };
 
   return (
@@ -75,7 +75,7 @@ function TodoModal() {
           ? "opacity-100 visible"
           : "opacity-0 invisible pointer-events-none"
       )}
-      onClick={() => setOpenModal(false)}
+      onClick={handleCloseModal}
     >
       <div
         className={cn(

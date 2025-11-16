@@ -94,6 +94,33 @@ export const updateTodo = async (prevState: any, formData: FormData) => {
   return { success: true, errors: todoErrors, user: updatedTodo };
 };
 
+//
+
+export const deleteTodo = async (id: number) => {
+  const cookieStore = await cookies();
+  const access = cookieStore.get("access")?.value;
+  if (!access) return null;
+  const response = await fetch(`${env.apiUrl}/todos/${id}/`, {
+    method: "DELETE",
+    headers: { Accept: "application/json", Authorization: `Bearer ${access}` },
+  });
+
+  if (!response?.ok) {
+    const errorData = await response.json();
+    return {
+      success: false,
+      errors: {
+        apiError: [errorData?.detail || "Failed to delete todo"],
+      },
+    };
+  }
+  return {
+    success: true,
+    errors: { apiError: undefined },
+  };
+};
+
+// action to get todos
 export async function getTodos() {
   const cookieStore = await cookies();
   const access = cookieStore.get("access")?.value;
@@ -114,7 +141,6 @@ export async function getTodos() {
   }
 
   const todos = await res.json();
-  console.log("TODOS ACTION:", todos);
   return todos;
 }
 
