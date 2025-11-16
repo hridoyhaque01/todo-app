@@ -1,9 +1,16 @@
 "use client";
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import { getTodos } from "@/actions";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type TodoContextType = {
-  todo: any;
-  setTodo: React.Dispatch<React.SetStateAction<any>>;
+  todos: any;
+  setTodos: React.Dispatch<React.SetStateAction<any>>;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openDropdown: boolean;
@@ -13,15 +20,34 @@ type TodoContextType = {
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 const TodoProvider = ({ children }: { children: ReactNode }) => {
-  const [todo, setTodo] = useState<any>(null);
+  const [todos, setTodos] = useState<any>(null);
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
+
+  // Function to fetch user from API
+  const refreshTodos = async () => {
+    try {
+      const data = await getTodos();
+      setTodos(data || null);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
+      setTodos(null);
+    }
+  };
+
+  // Fetch user once on mount
+  useEffect(() => {
+    const fetchTodos = async () => {
+      await refreshTodos();
+    };
+    fetchTodos();
+  }, []);
 
   return (
     <TodoContext.Provider
       value={{
-        todo,
-        setTodo,
+        todos,
+        setTodos,
         openModal,
         setOpenModal,
         openDropdown,
