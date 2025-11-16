@@ -1,7 +1,6 @@
 "use client";
-import { signup } from "@/actions";
 import { ROUTES } from "@/constants";
-import { SignupInput } from "@/lib";
+import { signup, SignupInput } from "@/lib";
 import Link from "next/link";
 import { useActionState, useReducer } from "react";
 import ApiErrorText from "../shared/ErrorText";

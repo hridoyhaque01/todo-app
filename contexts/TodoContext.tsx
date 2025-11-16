@@ -1,5 +1,6 @@
 "use client";
-import { getTodos } from "@/actions";
+import { getTodos } from "@/lib";
+import { ITodo } from "@/types";
 import React, {
   createContext,
   ReactNode,
@@ -9,8 +10,8 @@ import React, {
 } from "react";
 
 type TodoContextType = {
-  todos: any;
-  setTodos: React.Dispatch<React.SetStateAction<any>>;
+  todos: ITodo[];
+  setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openDropdown: boolean;
@@ -20,7 +21,7 @@ type TodoContextType = {
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 const TodoProvider = ({ children }: { children: ReactNode }) => {
-  const [todos, setTodos] = useState<any>(null);
+  const [todos, setTodos] = useState<ITodo[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
 
@@ -28,10 +29,10 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
   const refreshTodos = async () => {
     try {
       const data = await getTodos();
-      setTodos(data || null);
+      setTodos(data?.results || []);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_error) {
-      setTodos(null);
+      setTodos([]);
     }
   };
 

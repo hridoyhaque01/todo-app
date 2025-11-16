@@ -1,6 +1,6 @@
 "use client";
 
-import { getAuthUser } from "@/actions"; // your API call
+import { getAuthUser } from "@/lib"; // your API call
 import { IUser } from "@/types";
 import {
   createContext,

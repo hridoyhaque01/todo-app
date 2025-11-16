@@ -1,8 +1,7 @@
 "use client";
-import { updateProfile } from "@/actions";
 import { HomeIcon } from "@/constants";
 import { useAuth } from "@/contexts";
-import { UpdateInput } from "@/lib";
+import { UpdateInput, updateProfile } from "@/lib";
 import { useEffect, useReducer, useState } from "react";
 import Input from "../shared/Input";
 

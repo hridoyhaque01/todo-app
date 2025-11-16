@@ -74,7 +74,9 @@ export const login = async (prevState: any, formData: FormData) => {
     maxAge: refreshExpiry,
   });
 
-  redirect(ROUTES.dashboard);
+  console.log("Login successful, cookies set.");
+
+  return redirect(ROUTES.dashboard);
 };
 
 // action to signup user

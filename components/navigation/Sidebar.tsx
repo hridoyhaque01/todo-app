@@ -1,7 +1,6 @@
 "use client";
-import { logout } from "@/actions";
 import { LogoutIcon, ProfileIcon, ROUTES, TodoIcon } from "@/constants";
-import { cn } from "@/lib";
+import { cn, logout } from "@/lib";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import User from "../profile/User";

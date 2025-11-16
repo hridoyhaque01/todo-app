@@ -12,6 +12,11 @@ import { cookies } from "next/headers";
 // actions for authentication
 
 export const createTodo = async (prevState: any, formData: FormData) => {
+  const cookieStore = await cookies();
+  const access = cookieStore.get("access")?.value;
+
+  if (!access) return null;
+
   const result = createTodoSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
@@ -21,15 +26,15 @@ export const createTodo = async (prevState: any, formData: FormData) => {
 
   const submitData = new FormData();
   submitData.append("title", data.title);
-  submitData.append("last_name", data.description);
-  submitData.append("email", data.priority);
-  submitData.append("password", data.todo_date);
+  submitData.append("description", data.description);
+  submitData.append("priority", data.priority);
+  submitData.append("todo_date", data.todo_date);
 
   // call api to register user
   const response = await fetch(`${env.apiUrl}/todos/`, {
     method: "POST",
     body: submitData,
-    headers: { Accept: "application/json" },
+    headers: { Accept: "application/json", Authorization: `Bearer ${access}` },
   });
 
   if (!response.ok) {

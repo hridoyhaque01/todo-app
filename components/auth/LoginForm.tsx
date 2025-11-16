@@ -1,6 +1,6 @@
 "use client";
-import { login } from "@/actions";
 import { ROUTES } from "@/constants";
+import { login } from "@/lib";
 import { ILoginState } from "@/types";
 import Link from "next/link";
 import { useActionState, useReducer } from "react";

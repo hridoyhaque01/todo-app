@@ -18,7 +18,7 @@ const Textarea = ({
       )}
       <textarea className={cn("input", className)} {...rest} />
       {errorMessage && (
-        <p className="text-status-error text-sm -mt-1">{errorMessage}</p>
+        <p className="text-red-900 text-sm -mt-1">{errorMessage}</p>
       )}
     </div>
   );
