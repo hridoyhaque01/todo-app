@@ -24,7 +24,6 @@ function TodoList() {
     }
   };
 
-  console.log("Todos in TodoList:", todos);
 
   return (
     <div>

@@ -39,12 +39,11 @@ export const createTodo = async (formData: FormData) => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    console.error("Signup failed", errorData);
     return {
       success: false,
       errors: {
         ...todoErrors,
-        apiError: [errorData?.detail || "Signup failed"],
+        apiError: [errorData?.detail || "Failed to add todo"],
       },
     };
   }
@@ -81,12 +80,11 @@ export const updateTodo = async (formData: FormData, id: number) => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    console.error("Signup failed", errorData);
     return {
       success: false,
       errors: {
         ...todoErrors,
-        apiError: [errorData?.detail || "Signup failed"],
+        apiError: [errorData?.detail || "Failed to update todo"],
       },
     };
   }
@@ -108,7 +106,6 @@ export const deleteTodo = async (id: number) => {
 
   if (!response?.ok) {
     const errorData = await response.json();
-    console.log("Delete Todo failed", errorData);
     return {
       success: false,
       errors: {
@@ -143,8 +140,6 @@ export async function getTodos() {
   }
 
   const todos = await res.json();
-
-  console.log("Fetched todos:", todos);
   return todos;
 }
 

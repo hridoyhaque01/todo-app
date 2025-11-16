@@ -91,7 +91,6 @@ function TodoModal() {
       const formData = new FormData(e.currentTarget);
       const result: any = await updateTodo(formData, selectedTodo?.id!);
       setIsPending(false);
-      console.log("Update todo result:", result);
       if (result?.success) {
         handleUpdateTodo(result.todo);
         dispatch({ type: "RESET" });
@@ -101,7 +100,6 @@ function TodoModal() {
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_error) {
-      console.log(_error);
       setIsPending(false);
       setActionErrors({
         apiError: ["An unexpected error occurred. Please try again."],
