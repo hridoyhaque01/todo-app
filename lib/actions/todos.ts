@@ -92,7 +92,7 @@ export const updateTodo = async (formData: FormData, id: number) => {
   }
 
   const updatedTodo = await response.json();
-  return { success: true, errors: todoErrors, user: updatedTodo };
+  return { success: true, errors: todoErrors, todo: updatedTodo };
 };
 
 //
@@ -108,6 +108,7 @@ export const deleteTodo = async (id: number) => {
 
   if (!response?.ok) {
     const errorData = await response.json();
+    console.log("Delete Todo failed", errorData);
     return {
       success: false,
       errors: {
@@ -142,6 +143,8 @@ export async function getTodos() {
   }
 
   const todos = await res.json();
+
+  console.log("Fetched todos:", todos);
   return todos;
 }
 

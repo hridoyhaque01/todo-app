@@ -5,7 +5,7 @@ import { useState } from "react";
 import { TodoItem } from "./TodoItem";
 
 function TodoList() {
-  const { todos, removeTodo,handleSelectTodo } = useTodo();
+  const { todos, removeTodo, handleSelectTodo } = useTodo();
   const [pending, setPending] = useState<number | null>(null);
 
   const handleRemoveTodo = async (id: number) => {
@@ -23,6 +23,8 @@ function TodoList() {
       setPending(null);
     }
   };
+
+  console.log("Todos in TodoList:", todos);
 
   return (
     <div>

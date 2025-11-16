@@ -55,15 +55,16 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
 
   // additional function to update todo in state
   const handleUpdateTodo = (todo: ITodo) => {
-    setTodos((prevTodos) => {
-      const index = prevTodos.findIndex((t) => t.id === todo.id);
-      if (index !== -1) {
-        const updatedTodos = [...prevTodos];
-        updatedTodos[index] = todo;
-        return updatedTodos;
-      }
-      return prevTodos;
-    });
+    setTodos((prevTodos) =>
+      prevTodos.map((t) =>
+        t.id === todo.id
+          ? {
+              ...t,
+              ...todo,
+            }
+          : t
+      )
+    );
   };
 
   // Fetch user once on mount
@@ -87,7 +88,7 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
         selectedTodo,
         setSelectedTodo,
         handleSelectTodo,
-        handleUpdateTodo
+        handleUpdateTodo,
       }}
     >
       {children}
