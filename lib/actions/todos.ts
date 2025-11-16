@@ -11,7 +11,7 @@ import { cookies } from "next/headers";
 
 // actions for authentication
 
-export const createTodo = async (prevState: any, formData: FormData) => {
+export const createTodo = async (formData: FormData) => {
   const cookieStore = await cookies();
   const access = cookieStore.get("access")?.value;
 
@@ -53,7 +53,8 @@ export const createTodo = async (prevState: any, formData: FormData) => {
 };
 
 // action to update user profile
-export const updateTodo = async (prevState: any, formData: FormData) => {
+export const updateTodo = async (formData: FormData, id: number) => {
+  if (!id) return null;
   const cookieStore = await cookies();
   const access = cookieStore.get("access")?.value;
   if (!access) return null;
@@ -72,7 +73,7 @@ export const updateTodo = async (prevState: any, formData: FormData) => {
   });
 
   // call api to register user
-  const response = await fetch(`${env.apiUrl}/todos/3/`, {
+  const response = await fetch(`${env.apiUrl}/todos/${id}/`, {
     method: "PATCH",
     body: submitData,
     headers: { Accept: "application/json", Authorization: `Bearer ${access}` },

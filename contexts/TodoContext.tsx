@@ -20,6 +20,7 @@ type TodoContextType = {
   removeTodo: (id: number) => Promise<void>;
   setSelectedTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
   handleSelectTodo: (todo: ITodo | null, status: boolean) => void;
+  handleUpdateTodo: (todo: ITodo) => void;
 };
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
@@ -52,6 +53,19 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
     setOpenModal(status);
   };
 
+  // additional function to update todo in state
+  const handleUpdateTodo = (todo: ITodo) => {
+    setTodos((prevTodos) => {
+      const index = prevTodos.findIndex((t) => t.id === todo.id);
+      if (index !== -1) {
+        const updatedTodos = [...prevTodos];
+        updatedTodos[index] = todo;
+        return updatedTodos;
+      }
+      return prevTodos;
+    });
+  };
+
   // Fetch user once on mount
   useEffect(() => {
     const fetchTodos = async () => {
@@ -73,6 +87,7 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
         selectedTodo,
         setSelectedTodo,
         handleSelectTodo,
+        handleUpdateTodo
       }}
     >
       {children}

@@ -1,9 +1,9 @@
 "use client";
 import { DeleteIcon } from "@/constants";
 import { useTodo } from "@/contexts";
-import { cn, createTodo, CreateTodoInput } from "@/lib";
+import { cn, createTodo, CreateTodoInput, updateTodo } from "@/lib";
 import { ITodo } from "@/types";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import ApiErrorText from "../shared/ErrorText";
 import Input from "../shared/Input";
 import Textarea from "../shared/Textarea";
@@ -27,24 +27,43 @@ const reducer = (state: CreateTodoInput, action: any) => {
       return { ...state, todo_date: action.payload };
     case "RESET":
       return initialState;
+    case "INITIALIZE":
+      return { ...state, ...action.payload };
     default:
       return state;
   }
 };
 function TodoModal() {
-  const { setTodos, openModal, handleSelectTodo } = useTodo();
+  const {
+    setTodos,
+    openModal,
+    handleSelectTodo,
+    selectedTodo,
+    handleUpdateTodo,
+  } = useTodo();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isPending, setIsPending] = useState(false);
   const [actionErrors, setActionErrors] = useState<any>({});
+  const btnText = selectedTodo ? "Update" : "Add";
+  const btnPendingText = selectedTodo ? "Updating..." : "Adding...";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (selectedTodo?.id) {
+      await updateTodoHandler(e);
+    } else {
+      await addTodoHandler(e);
+    }
+  };
+
+  // add todo handler
+  const addTodoHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       setIsPending(true);
       setActionErrors({});
 
       const formData = new FormData(e.currentTarget);
-      const result: any = await createTodo(null, formData);
+      const result: any = await createTodo(formData);
       setIsPending(false);
 
       if (result?.success) {
@@ -62,10 +81,42 @@ function TodoModal() {
     }
   };
 
+  // update todo handler
+
+  const updateTodoHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      setIsPending(true);
+      setActionErrors({});
+
+      const formData = new FormData(e.currentTarget);
+      const result: any = await updateTodo(formData, selectedTodo?.id!);
+      setIsPending(false);
+
+      if (result?.success) {
+        handleUpdateTodo(result.todo);
+        dispatch({ type: "RESET" });
+      } else if (result?.errors) {
+        setActionErrors(result.errors);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
+      setIsPending(false);
+      setActionErrors({
+        apiError: ["An unexpected error occurred. Please try again."],
+      });
+    }
+  };
+
   const handleCloseModal = () => {
     dispatch({ type: "RESET" });
     handleSelectTodo(null, false);
   };
+
+  useEffect(() => {
+    if (selectedTodo && selectedTodo?.id) {
+      dispatch({ type: "INITIALIZE", payload: selectedTodo });
+    }
+  }, [selectedTodo]);
 
   return (
     <div
@@ -197,7 +248,7 @@ function TodoModal() {
               className="btn btn_primary flex-1 max-w-[90px] h-[34px]!"
               disabled={isPending}
             >
-              {isPending ? "Adding..." : "Add"}
+              {isPending ? btnPendingText : btnText}
             </button>
 
             <button
