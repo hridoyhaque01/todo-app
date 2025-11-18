@@ -97,7 +97,7 @@
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
-    "markdown": true,
+    "markdown": false,
     "scminput": false,
     "javascript": true,
     "javascriptreact": true,
