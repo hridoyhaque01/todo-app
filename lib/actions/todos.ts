@@ -4,6 +4,7 @@ import { env } from "@/config";
 import {
   CreateTodoInput,
   createTodoSchema,
+  getQuery,
   UpdateTodoInput,
   updateTodoSchema,
 } from "@/lib";
@@ -38,7 +39,10 @@ export const createTodo = async (formData: FormData) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
+    const errorData =
+      response?.status === 500
+        ? { detail: "Something went wrong" }
+        : await response.json();
     return {
       success: false,
       errors: {
@@ -79,7 +83,10 @@ export const updateTodo = async (formData: FormData, id: number) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
+    const errorData =
+      response?.status === 500
+        ? { detail: "Something went wrong" }
+        : await response.json();
     return {
       success: false,
       errors: {
@@ -91,6 +98,58 @@ export const updateTodo = async (formData: FormData, id: number) => {
 
   const updatedTodo = await response.json();
   return { success: true, errors: todoErrors, todo: updatedTodo };
+};
+
+// action to update todo position
+export const updateTodoPosition = async (id: number, position: number) => {
+  if (!id) return null;
+
+  const cookieStore = await cookies();
+  const access = cookieStore.get("access")?.value;
+  if (!access) return null;
+
+  try {
+    const submitData = new FormData();
+    submitData.append("position", position.toString());
+
+    console.log("Updating todo position:", id, position);
+
+    // call api to update todo position
+    const response = await fetch(`${env.apiUrl}/todos/${id}/`, {
+      method: "PATCH",
+      body: submitData,
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData =
+        response?.status === 500
+          ? { detail: "Something went wrong" }
+          : await response.json();
+      return {
+        success: false,
+        errors: {
+          apiError: [errorData?.detail || "Failed to update todo position"],
+        },
+      };
+    }
+
+    const updatedTodo = await response.json();
+    console.log("Todo position updated successfully:", updatedTodo);
+
+    return { success: true, errors: {}, todo: updatedTodo };
+  } catch (err) {
+    console.error("Error updating todo position:", err);
+    return {
+      success: false,
+      errors: {
+        apiError: ["Network error while updating position"],
+      },
+    };
+  }
 };
 
 //
@@ -120,13 +179,19 @@ export const deleteTodo = async (id: number) => {
 };
 
 // action to get todos
-export async function getTodos() {
+export async function getTodos(search?: string, filterBy?: string) {
   const cookieStore = await cookies();
   const access = cookieStore.get("access")?.value;
 
   if (!access) return null;
 
-  const res = await fetch(`${env.apiUrl}/todos/`, {
+  const queries = {
+    search: search || "",
+    todo_date: filterBy || "",
+  };
+  const query = getQuery(queries);
+  console.log({ query });
+  const res = await fetch(`${env.apiUrl}/todos/${query}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${access}`,

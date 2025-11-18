@@ -10,4 +10,9 @@ interface ITodo {
   updated_at: string;
 }
 
-export type { ITodo };
+interface ITodoFilter {
+  label: string;
+  value: string;
+}
+
+export type { ITodo, ITodoFilter };

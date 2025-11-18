@@ -3,6 +3,7 @@ import {
   DragIcon,
   EditIcon,
   SpinnerAnimatedIcon,
+  TODO_COLORS,
 } from "@/constants";
 import { formatedDateString } from "@/lib";
 import { ITodo } from "@/types";
@@ -18,13 +19,22 @@ export const TodoItem = ({
   removeHandler: (id: number) => Promise<void>;
   handleSelectTodo: (todo: ITodo | null, status: boolean) => void;
 }) => {
+  const color = TODO_COLORS[todo?.priority as keyof typeof TODO_COLORS];
   return (
-    <div className="p-6 flex flex-col gap-4 border border-neutral-100 rounded-lg bg-white">
+    <div
+      className="p-6 flex flex-col gap-4 border rounded-lg bg-white"
+      style={{
+        borderColor: color?.bg,
+      }}
+    >
       <div className="flex items-center gap-1">
         <h2 className="text-blue-900 text-base font-medium flex-1">
           {todo?.title}
         </h2>
-        <div className="px-2.5 py-1 bg-red-100 rounded-lg text-red-900 capitalize text-sm">
+        <div
+          className="px-2.5 py-1 rounded-lg capitalize text-sm"
+          style={{ backgroundColor: color?.bg, color: color?.text }}
+        >
           {todo?.priority}
         </div>
         <button

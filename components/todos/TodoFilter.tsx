@@ -1,15 +1,31 @@
 "use client";
-import { CogIcon, SearchIcon, TODO_FILTERS } from "@/constants";
+import { CogIcon, SearchIcon } from "@/constants";
 import { useTodo } from "@/contexts";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
-import { cn } from "@/lib";
+import { cn, getTodoFilters } from "@/lib";
+import { ITodoFilter } from "@/types";
 import { useRef } from "react";
 
 function TodoFilter() {
   // ref now points to the wrapper that contains both the button and the dropdown panel
+  const filters = getTodoFilters();
   const ref = useRef<HTMLDivElement | null>(null);
-  const { openDropdown, setOpenDropdown } = useTodo();
+  const {
+    openDropdown,
+    setOpenDropdown,
+    search,
+    setSearch,
+    filterBy,
+    setFilterBy,
+    handleFilter,
+  } = useTodo();
   useOnClickOutside(ref, () => setOpenDropdown(false));
+
+  const handleFilterSearch = (item: ITodoFilter) => {
+    setFilterBy(item);
+    setOpenDropdown(false);
+    handleFilter(search, item?.value);
+  };
 
   return (
     <div className="mt-10 flex items-center gap-2">
@@ -18,8 +34,14 @@ function TodoFilter() {
           type="text"
           placeholder="Search"
           className="w-full px-3 py-2 text-xs text-black font-semibold placeholder:text-black-800 placeholder:opacity-50 focus:outline-none"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <button type="button" className="size-9! btn btn_primary">
+        <button
+          type="button"
+          className="size-9! btn btn_primary"
+          onClick={() => handleFilter(search, filterBy?.value)}
+        >
           <SearchIcon className="size-4" />
         </button>
       </div>
@@ -30,7 +52,7 @@ function TodoFilter() {
           className="px-3 py-2 border border-neutral-100 rounded-lg text-base text-black leading-[100%] bg-white flex items-center gap-2 cursor-pointer"
           onClick={() => setOpenDropdown(!openDropdown)}
         >
-          Filter By <CogIcon />
+          {filterBy?.label || "Filter By"} <CogIcon />
         </button>
 
         <div
@@ -44,20 +66,22 @@ function TodoFilter() {
           <div className="text-xs text-black-800 leading-[140%] border-b border-neutral-100 pb-2 mb-2">
             Date
           </div>
-          {TODO_FILTERS.map(({ label, value }) => (
+          {filters.map((item: ITodoFilter) => (
             <label
-              htmlFor={value}
+              htmlFor={item?.value}
               className="flex items-center cursor-pointer gap-2"
-              key={value}
+              key={item?.value}
             >
               <input
                 type="radio"
                 name="date"
                 value="asc"
-                id={value}
+                id={item?.value}
                 className="accent-blue-700"
+                checked={filterBy?.value === item?.value}
+                onChange={() => handleFilterSearch(item)}
               />
-              <span className="text-xs text-black-800">{label}</span>
+              <span className="text-xs text-black-800">{item?.label}</span>
             </label>
           ))}
         </div>

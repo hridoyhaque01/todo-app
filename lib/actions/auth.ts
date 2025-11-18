@@ -37,8 +37,11 @@ export const login = async (prevState: any, formData: FormData) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-    console.error("Signup failed", errorData);
+    const errorData =
+      response?.status === 500
+        ? { detail: "Something went wrong" }
+        : await response.json();
+    console.log({ response });
     return {
       success: false,
       errors: {
@@ -100,7 +103,10 @@ export const signup = async (prevState: any, formData: FormData) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
+    const errorData =
+      response?.status === 500
+        ? { detail: "Something went wrong" }
+        : await response.json();
     console.error("Signup failed", errorData);
     return {
       success: false,
@@ -146,7 +152,10 @@ export const updateProfile = async (prevState: any, formData: FormData) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
+    const errorData =
+      response?.status === 500
+        ? { detail: "Something went wrong" }
+        : await response.json();
     console.error("Signup failed", errorData);
     return {
       success: false,

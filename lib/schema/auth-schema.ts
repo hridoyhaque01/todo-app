@@ -7,7 +7,7 @@ export const loginSchema = z.object({
   password: z
     .string({ message: "Password is required" })
     .min(4, { message: "Password must be at least 8 characters" }),
-  remember: z.boolean().optional(),
+  remember: z.enum(["on", "off"]).optional(),
 });
 
 export const signupSchema = z

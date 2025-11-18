@@ -18,4 +18,27 @@ interface ILoginState {
   remember: boolean;
 }
 
-export type { IFInputProps, ILoginState };
+// interface for Drag and Drop hook options and return types
+interface IUseDragAndDropOptions<T> {
+  items: T[];
+  onItemsChange: (items: T[]) => void;
+}
+
+// interface for Drag and Drop hook return types
+interface IUseDragAndDropReturn {
+  dragOverIndex: number | null;
+  draggedIndex: number | null;
+  handleDragStart: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
+  handleDragEnter: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
+  handleDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  handleDragLeave: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
+  handleDrop: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
+  handleDragEnd: () => void;
+}
+
+export type {
+  IFInputProps,
+  ILoginState,
+  IUseDragAndDropOptions,
+  IUseDragAndDropReturn,
+};
