@@ -1,4 +1,4 @@
-import { HomeIcon, IMAGES } from "@/constants";
+import { BellIcon, CalendarIcon, IMAGES } from "@/constants";
 import Image from "next/image";
 
 function Header() {
@@ -17,13 +17,13 @@ function Header() {
           type="button"
           className="size-[34px] rounded-lg bg-blue-500 flex items-center justify-center text-white justify-self-end"
         >
-          <HomeIcon className="size-4" />
+          <BellIcon className="size-4" />
         </button>
         <button
           type="button"
           className="size-[34px] rounded-lg bg-blue-500 flex items-center justify-center text-white justify-self-end"
         >
-          <HomeIcon className="size-4" />
+          <CalendarIcon className="size-4" />
         </button>
         <div className="text-sm font-medium leading-[100%] text-blue-900">
           <p>

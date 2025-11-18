@@ -36,9 +36,16 @@ interface IUseDragAndDropReturn {
   handleDragEnd: () => void;
 }
 
+interface IStatus {
+  isLoading: boolean;
+  isError: boolean;
+  error: string | null | any;
+}
+
 export type {
   IFInputProps,
   ILoginState,
+  IStatus,
   IUseDragAndDropOptions,
   IUseDragAndDropReturn,
 };

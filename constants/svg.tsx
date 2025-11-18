@@ -58,22 +58,16 @@ export const EyeIcon = (props: React.SVGProps<SVGSVGElement>) => {
 
 export const LogoutIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
+    width="22"
     height="24"
-    viewBox="0 0 24 24"
+    viewBox="0 0 22 24"
     fill="none"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
-      d="M21.1303 9.8531C22.2899 11.0732 22.2899 12.9268 21.1303 14.1469C19.1745 16.2047 15.8155 19 12 19C8.18448 19 4.82549 16.2047 2.86971 14.1469C1.7101 12.9268 1.7101 11.0732 2.86971 9.8531C4.82549 7.79533 8.18448 5 12 5C15.8155 5 19.1745 7.79533 21.1303 9.8531Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
+      d="M16.8519 6.66667L15.1667 8.53333L17.0926 10.6667H7.22222V13.3333H17.0926L15.1667 15.4667L16.8519 17.3333L21.6667 12L16.8519 6.66667ZM2.40741 2.66667H10.8333V0H2.40741C1.08333 0 0 1.2 0 2.66667V21.3333C0 22.8 1.08333 24 2.40741 24H10.8333V21.3333H2.40741V2.66667Z"
+      fill="currentColor"
     />
   </svg>
 );

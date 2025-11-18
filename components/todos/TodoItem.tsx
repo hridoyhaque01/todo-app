@@ -48,7 +48,7 @@ export const TodoItem = ({
         {todo?.description || "No description provided."}
       </p>
       <div className="flex items-center gap-2">
-        <p className="flex-1">{formatedDateString(todo?.todo_date)}</p>
+        <p className="flex-1 text-sm text-black-800">{formatedDateString(todo?.todo_date)}</p>
         <button
           type="button"
           className="size-8 bg-blue-50 rounded-lg flex items-center justify-center border-none outline-none cursor-pointer text-blue-400"

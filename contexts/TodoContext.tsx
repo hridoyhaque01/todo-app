@@ -1,6 +1,6 @@
 "use client";
 import { deleteTodo, getTodos, updateTodoPosition } from "@/lib";
-import { ITodo, ITodoFilter } from "@/types";
+import { IStatus, ITodo, ITodoFilter } from "@/types";
 import React, {
   createContext,
   ReactNode,
@@ -18,6 +18,7 @@ type TodoContextType = {
   deletePending: number | null;
   search: string;
   filterBy: ITodoFilter | null;
+  todoStatus: IStatus;
   // setters and handlers
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,15 +44,34 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [deletePending, setDeletePending] = useState<number | null>(null);
   const [search, setSearch] = useState<string>("");
   const [filterBy, setFilterBy] = useState<ITodoFilter | null>(null);
+  const [todoStatus, setTodoStatus] = useState<IStatus>({
+    isLoading: false,
+    isError: false,
+    error: null,
+  });
 
   // Function to fetch user from API
   const refreshTodos = async (searchValue?: string, filterValue?: string) => {
     try {
+      setTodoStatus({
+        isLoading: true,
+        isError: false,
+        error: null,
+      });
       const data = await getTodos(searchValue, filterValue);
       setTodos(data?.results || []);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setTodoStatus({
+        isLoading: false,
+        isError: false,
+        error: null,
+      });
     } catch (_error) {
       setTodos([]);
+      setTodoStatus({
+        isLoading: false,
+        isError: true,
+        error: _error,
+      });
     }
   };
 
@@ -171,6 +191,7 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
         filterBy,
         setFilterBy,
         handleFilter,
+        todoStatus,
       }}
     >
       {children}
