@@ -112,8 +112,6 @@ export const updateTodoPosition = async (id: number, position: number) => {
     const submitData = new FormData();
     submitData.append("position", position.toString());
 
-    console.log("Updating todo position:", id, position);
-
     // call api to update todo position
     const response = await fetch(`${env.apiUrl}/todos/${id}/`, {
       method: "PATCH",
@@ -138,7 +136,6 @@ export const updateTodoPosition = async (id: number, position: number) => {
     }
 
     const updatedTodo = await response.json();
-    console.log("Todo position updated successfully:", updatedTodo);
 
     return { success: true, errors: {}, todo: updatedTodo };
   } catch (err) {
@@ -152,8 +149,7 @@ export const updateTodoPosition = async (id: number, position: number) => {
   }
 };
 
-//
-
+// action to delete todo
 export const deleteTodo = async (id: number) => {
   const cookieStore = await cookies();
   const access = cookieStore.get("access")?.value;
@@ -179,7 +175,7 @@ export const deleteTodo = async (id: number) => {
 };
 
 // action to get todos
-export async function getTodos(search?: string, filterBy?: string) {
+export const getTodos = async (search?: string, filterBy?: string) => {
   const cookieStore = await cookies();
   const access = cookieStore.get("access")?.value;
 
@@ -190,7 +186,6 @@ export async function getTodos(search?: string, filterBy?: string) {
     todo_date: filterBy || "",
   };
   const query = getQuery(queries);
-  console.log({ query });
   const res = await fetch(`${env.apiUrl}/todos/${query}`, {
     headers: {
       Accept: "application/json",
@@ -206,7 +201,7 @@ export async function getTodos(search?: string, filterBy?: string) {
 
   const todos = await res.json();
   return todos;
-}
+};
 
 const todoErrors = {
   title: undefined,

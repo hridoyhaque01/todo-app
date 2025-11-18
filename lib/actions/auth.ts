@@ -41,7 +41,6 @@ export const login = async (prevState: any, formData: FormData) => {
       response?.status === 500
         ? { detail: "Something went wrong" }
         : await response.json();
-    console.log({ response });
     return {
       success: false,
       errors: {
@@ -65,7 +64,7 @@ export const login = async (prevState: any, formData: FormData) => {
     httpOnly: true,
     secure: true,
     path: "/",
-    sameSite: "strict",
+    sameSite: "lax",
     maxAge: accessExpiry,
   });
 
@@ -73,7 +72,7 @@ export const login = async (prevState: any, formData: FormData) => {
     httpOnly: true,
     secure: true,
     path: "/",
-    sameSite: "strict",
+    sameSite: "lax",
     maxAge: refreshExpiry,
   });
 
