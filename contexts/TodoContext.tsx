@@ -36,6 +36,7 @@ type TodoContextType = {
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
+// Provider component
 const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [openModal, setOpenModal] = useState(false);
@@ -199,6 +200,7 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Custom hook to use the TodoContext
 const useTodo = () => {
   const ctx = useContext(TodoContext);
   if (!ctx) {

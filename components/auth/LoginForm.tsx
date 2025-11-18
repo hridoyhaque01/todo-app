@@ -1,38 +1,19 @@
 "use client";
 import { ROUTES } from "@/constants";
+import { useAuth } from "@/contexts";
 import { login } from "@/lib";
-import { ILoginState } from "@/types";
 import Link from "next/link";
-import { useActionState, useReducer } from "react";
+import { useActionState } from "react";
 import ApiErrorText from "../shared/ErrorText";
 import Input from "../shared/Input";
 import Password from "../shared/Password";
-
-const initialState: ILoginState = {
-  email: "",
-  password: "",
-  remember: false,
-};
-
-const reducer = (state: ILoginState, action: any) => {
-  switch (action.type) {
-    case "SET_EMAIL":
-      return { ...state, email: action.payload };
-    case "SET_PASSWORD":
-      return { ...state, password: action.payload };
-    case "SET_REMEMBER":
-      return { ...state, remember: action.payload };
-    default:
-      return state;
-  }
-};
 
 function LoginForm() {
   const [actionState, loginAction, isPending] = useActionState(
     login,
     undefined
   );
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { loginState: state, loginDispatch: dispatch } = useAuth();
 
   return (
     <form action={loginAction} className="mt-9 flex flex-col gap-4">

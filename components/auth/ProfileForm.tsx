@@ -1,86 +1,17 @@
 "use client";
 import { HomeIcon } from "@/constants";
 import { useAuth } from "@/contexts";
-import { UpdateInput, updateProfile } from "@/lib";
-import { useEffect, useReducer, useState } from "react";
 import Input from "../shared/Input";
 
-const initialState: UpdateInput = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  address: "",
-  contact_number: "",
-  birthday: "",
-  bio: "",
-  profile_image: "",
-};
-
-const reducer = (state: UpdateInput, action: any) => {
-  switch (action.type) {
-    case "SET_FIRST_NAME":
-      return { ...state, first_name: action.payload };
-    case "SET_LAST_NAME":
-      return { ...state, last_name: action.payload };
-    case "SET_EMAIL":
-      return { ...state, email: action.payload };
-    case "SET_ADDRESS":
-      return { ...state, address: action.payload };
-    case "SET_CONTACT_NUMBER":
-      return { ...state, contact_number: action.payload };
-    case "SET_BIRTHDAY":
-      return { ...state, birthday: action.payload };
-    case "SET_BIO":
-      return { ...state, bio: action.payload };
-    case "SET_PROFILE_IMAGE":
-      return { ...state, profile_image: action.payload };
-    case "INITIATE":
-      return { ...state, ...action.payload };
-    default:
-      return state;
-  }
-};
-
 function ProfileForm() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { user, setUser } = useAuth();
-  const [isPending, setIsPending] = useState(false);
-  const [actionErrors, setActionErrors] = useState<any>({});
-
-  // handle profile image change
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      dispatch({ type: "SET_PROFILE_IMAGE", payload: imageUrl });
-    }
-  };
-
-  // handle form submit
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsPending(true);
-    setActionErrors({});
-
-    const formData = new FormData(e.currentTarget);
-
-    const result: any = await updateProfile(null, formData);
-
-    setIsPending(false);
-
-    if (result?.success && result?.user) {
-      setUser(result.user);
-      dispatch({ type: "INITIATE", payload: result.user });
-    } else if (result?.errors) {
-      setActionErrors(result.errors);
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      dispatch({ type: "INITIATE", payload: user });
-    }
-  }, [user]);
+  const {
+    profileState: state,
+    isUpdating: isPending,
+    updateErrors: actionErrors,
+    handleImageChange,
+    HandlerUpdateProfile: handleSubmit,
+    profileDispatch: dispatch,
+  } = useAuth();
 
   return (
     <form onSubmit={handleSubmit} className="mt-8">

@@ -9,7 +9,7 @@ import {
 import { cn, logout } from "@/lib";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import User from "../profile/User";
+import User from "../auth/User";
 
 function Sidebar() {
   const pathname = usePathname();

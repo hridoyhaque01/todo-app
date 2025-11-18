@@ -1,43 +1,19 @@
 "use client";
 import { ROUTES } from "@/constants";
-import { signup, SignupInput } from "@/lib";
+import { useAuth } from "@/contexts";
+import { signup } from "@/lib";
 import Link from "next/link";
-import { useActionState, useReducer } from "react";
+import { useActionState } from "react";
 import ApiErrorText from "../shared/ErrorText";
 import Input from "../shared/Input";
 import Password from "../shared/Password";
-
-const initialState: SignupInput = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
-  confirm_password: "",
-};
-
-const reducer = (state: SignupInput, action: any) => {
-  switch (action.type) {
-    case "SET_FIRST_NAME":
-      return { ...state, first_name: action.payload };
-    case "SET_LAST_NAME":
-      return { ...state, last_name: action.payload };
-    case "SET_EMAIL":
-      return { ...state, email: action.payload };
-    case "SET_PASSWORD":
-      return { ...state, password: action.payload };
-    case "SET_CONFIRM_PASSWORD":
-      return { ...state, confirm_password: action.payload };
-    default:
-      return state;
-  }
-};
 
 function SignupForm() {
   const [actionState, signupAction, isPending] = useActionState(
     signup,
     undefined
   );
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { signupState: state, signupDispatch: dispatch } = useAuth();
   return (
     <form action={signupAction} className="mt-9 flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">

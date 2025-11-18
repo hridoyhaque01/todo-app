@@ -1,4 +1,4 @@
-import ProfileForm from "@/components/profile/ProfileForm";
+import ProfileForm from "@/components/auth/ProfileForm";
 
 function Profile() {
   return (
