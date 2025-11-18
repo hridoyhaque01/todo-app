@@ -11,7 +11,7 @@ const Input = ({
   ...rest
 }: IFInputProps) => {
   return (
-    <div className={cn("w-full flex flex-col gap-1", wrapper)}>
+    <div className={cn("w-full flex flex-col gap-2", wrapper)}>
       {label && (
         <div className="flex items-center justify-between">
           <label className={cn("label", labelClass)}>{label}</label>
@@ -19,7 +19,7 @@ const Input = ({
       )}
       <input type={type} className={cn("input", className)} {...rest} />
       {errorMessage && (
-        <p className="text-status-error text-sm -mt-1">{errorMessage}</p>
+        <p className="text-red-900 text-sm -mt-1 text-left">{errorMessage}</p>
       )}
     </div>
   );
