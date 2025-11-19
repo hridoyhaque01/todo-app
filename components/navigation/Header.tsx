@@ -1,5 +1,6 @@
 import { BellIcon, CalendarIcon, IMAGES } from "@/constants";
 import Image from "next/image";
+import { DateDisplay } from "./DateDisplay";
 
 function Header() {
   return (
@@ -25,11 +26,7 @@ function Header() {
         >
           <CalendarIcon className="size-4" />
         </button>
-        <div className="text-sm font-medium leading-[100%] text-blue-900">
-          <p>
-            <span className="text-base">Friday</span> <br /> 07/11/2025
-          </p>
-        </div>
+        <DateDisplay />
       </div>
     </header>
   );
